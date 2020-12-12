@@ -1,0 +1,58 @@
+- tao Room      "create room"
+    du lieu truyen xuong la
+          /**
+       * {
+       * hostId: String,
+       * zone:{
+       *  a: String,
+       *  b: String,
+       *  c: String
+       *  },
+       * status: full/new/...
+       * }
+       **/
+    o socket nay sau khi tao xong thi se tra len cho client thong qua socket     "new room of " + hostId.toString()
+
+- lay toan bo danh sach cac phong theo id cua chu room      "get room list"
+    du lieu truyen xuong la
+          /**
+       * {
+       * hostId: String
+       * }
+       **/
+    o socket nay sau khi tao xong thi se tra len cho client thong qua socket     "room list"
+    
+
+- lay toan bo danh sach cua cac thanh vien trong phong the      "get player list"
+    du lieu truyen xuong la
+          /**
+       * {
+       * roomPIN: number
+       * }
+       **/
+    o socket nay sau khi tao xong thi se tra len cho client thong qua socket     "update player list " + roomPIN
+    
+
+- join vao room     "join room"
+    du lieu truyen xuong la
+          /**
+       * {
+       * roomPIN: number,
+       * userId: String
+       * }
+       */
+    o socket nay sau khi tao xong thi se tra len cho client thong qua socket     "player list " + roomPIN
+    
+
+- tra xuong location hien tai 1 user cho chu phong       "location of user"
+    du lieu truyen xuong la
+        /**
+         * {
+         * roomPIN: String,
+         * userId: String,
+         * lastTimeOnl: date,
+         * location,
+         * status: onl/off
+         * }
+         **/
+    o socket nay sau khi tao xong thi se tra len cho client thong qua socket     "location of user for " + room.host
