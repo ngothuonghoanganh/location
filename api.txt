@@ -1,3 +1,4 @@
+--ADMIN------------------------
 - tao Room      "create room"
     du lieu truyen xuong la
           /**
@@ -11,17 +12,8 @@
        * status: full/new/...
        * }
        **/
-    o socket nay sau khi tao xong thi se tra len cho client thong qua socket     "new room of " + hostId.toString()
+    o socket nay sau khi tao xong thi se tra len cho client thong qua socket     "new room of " + hostId.toString() 
 
-- lay toan bo danh sach cac phong theo id cua chu room      "get room list"
-    du lieu truyen xuong la
-          /**
-       * {
-       * hostId: String
-       * }
-       **/
-    o socket nay sau khi tao xong thi se tra len cho client thong qua socket     "room list"
-    
 
 - lay toan bo danh sach cua cac thanh vien trong phong the      "get player list"
     du lieu truyen xuong la
@@ -32,6 +24,18 @@
        **/
     o socket nay sau khi tao xong thi se tra len cho client thong qua socket     "update player list " + roomPIN
     
+--USER------------------------
+
+- lay toan bo danh sach cac phong theo id cua chu room      "get room list"
+    du lieu truyen xuong la
+          /**
+       * {
+       * hostId: String
+       * }
+       **/
+    neu khong truyen id chu phong xuong thi truyen object {} để lấy toàn bộ room
+    o socket nay sau khi tao xong thi se tra len cho client thong qua socket     "room list"
+
 
 - join vao room     "join room"
     du lieu truyen xuong la

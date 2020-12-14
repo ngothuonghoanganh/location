@@ -14,7 +14,7 @@ let UserSchema = new mongoose.Schema({
   },
   //  image:{type: [PictureSchema]},
   //  bio:[String],
-  email: {
+  phone: {
     type: String,
     lowercase: true,
     index: true,

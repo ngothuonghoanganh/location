@@ -7,12 +7,15 @@ module.exports = {
   async createUser(req, res) { 
     try {
    
-    const filter = {
+    const filter = [{
       username: req.body.user.username
-    };
+    },{
+      phone: req.body.user.phone
+    }];
    
-       const user= await User.findOne(filter);
-        if (user != null) {
+       const user= await User.find({$or: filter});
+       console.log(user)
+        if (user.length !== 0) {
           res.send({
             username: null
           })
