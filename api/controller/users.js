@@ -40,7 +40,7 @@ module.exports = {
       console.log("user-login " + req.body.username)
       console.log("user-login " + req.body.password)
       const filter = {
-        username: req.body.username,
+        phone: req.body.phone,
         password: req.body.password
       };
   
