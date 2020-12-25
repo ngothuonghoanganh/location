@@ -12,7 +12,7 @@ module.exports = {
     },{
       phone: req.body.user.phone
     }];
-   
+      console.log('aaa')
        const user= await User.find({$or: filter});
        console.log(user)
         if (user.length !== 0) {

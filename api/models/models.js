@@ -40,7 +40,7 @@ let userStatusDetails = new mongoose.Schema({
 let roomSchema = new mongoose.Schema({
   roomPIN: Number,
   host: { type: String },
-  members: [mongoose.Types.ObjectId],
+  members: [String],
   zone: { type: Object },
   status: { type: String },
 });

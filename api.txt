@@ -42,7 +42,7 @@
           /**
        * {
        * roomPIN: number,
-       * userId: String
+       * phone: String
        * }
        */
     o socket nay sau khi tao xong thi se tra len cho client thong qua socket     "player list " + roomPIN
@@ -60,3 +60,12 @@
          * }
          **/
     o socket nay sau khi tao xong thi se tra len cho client thong qua socket     "location of user for " + room.host
+
+
+- kiem tra user do da tham gia nhung room nao       "room allow user"
+            /**
+         * {
+         * phone: String,
+         * }
+         **/
+    o socket nay sau khi tao xong thi se tra len cho client thong qua socket        "user " + phone

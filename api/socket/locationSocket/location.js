@@ -8,7 +8,11 @@ module.exports = {
   quizGameSocket(socket, io) {
     console.log("New client connected");
 
-    socket.on("create room", async ({ hostId, zone, status } = {}) => {
+    socket.on("create room", async ({
+      hostId,
+      zone,
+      status
+    } = {}) => {
       /**
        * {
        * hostId: String,
@@ -41,14 +45,18 @@ module.exports = {
       }
     });
 
-    socket.on("get room list", async ({ hostId } = {}) => {
+    socket.on("get room list", async ({
+      hostId
+    } = {}) => {
       /**
        * {
        * hostId: String
        * }
        **/
       try {
-        const filter = hostId ? { host: hostId } : {};
+        const filter = hostId ? {
+          host: hostId
+        } : {};
         const messages = await Room.find(filter);
         console.log(messages);
         console.log("room list");
@@ -63,11 +71,12 @@ module.exports = {
     // broadcast the latest player list if someone requested
     socket.on("get player list", (roomPIN) => {
       try {
-        const pinFilter = { roomPIN: roomPIN };
+        const pinFilter = {
+          roomPIN: roomPIN
+        };
         Room.findOne(pinFilter, function (err, doc) {
           // console.log("FOUND DOC:", doc);
-          if (err) {
-          } else {
+          if (err) {} else {
             if (doc) {
               console.log(doc);
               io.sockets.emit("update player list " + roomPIN, doc.members);
@@ -79,7 +88,10 @@ module.exports = {
       }
     });
 
-    socket.on("join room", async ({ roomPIN, userId } = {}) => {
+    socket.on("join room", async ({
+      roomPIN,
+      phone
+    } = {}) => {
       /**
        * {
        * roomPIN: number,
@@ -87,12 +99,21 @@ module.exports = {
        * }
        */
       try {
-        const filter = roomPIN ? { roomPIN: roomPIN } : {};
+        const filter = roomPIN ? {
+          roomPIN: roomPIN
+        } : {};
         const room = await Room.findOne(filter);
         console.log(roomPIN);
-        // room.members.push(userId);
+        const user = await User.find({
+          phone: phone
+        })
+        if (user) room.members.push(phone);
         await room.save();
-        let members = await User.find({ _id: { $in: room.members } });
+        let members = await User.find({
+          phone: {
+            $in: room.members
+          }
+        });
         members = members.map((member) => {
           member = member.toJSON();
           delete member.password;
@@ -108,7 +129,13 @@ module.exports = {
 
     socket.on(
       "location of user",
-      async ({ roomPIN, userId, location, lastTimeOnl, status } = {}) => {
+      async ({
+        roomPIN,
+        userId,
+        location,
+        lastTimeOnl,
+        status
+      } = {}) => {
         /**
          * {
          * roomPIN: String,
@@ -119,7 +146,9 @@ module.exports = {
          * }
          **/
         try {
-          let userDetail = await UserStatusDetails.findOne({ userID: userId });
+          let userDetail = await UserStatusDetails.findOne({
+            userID: userId
+          });
           if (userDetail) {
             userDetail.lastTimeOnl = lastTimeOnl;
             userDetail.locations.push(userDetail.lastLocation);
@@ -135,7 +164,9 @@ module.exports = {
             });
           }
 
-          const room = await Room.findOne({ 'roomPIN': roomPIN });
+          const room = await Room.findOne({
+            'roomPIN': roomPIN
+          });
           console.log("location of user for " + room.host)
           if (room) {
             io.sockets.emit("location of user for " + room.host, userDetail);
@@ -145,5 +176,26 @@ module.exports = {
         }
       }
     );
+
+
+    socket.on("room allow user", async ({
+      phone
+    } = {}) => {
+      /**
+       * {
+       * phone: String
+       * }
+       */
+      try {
+        const room = await Room.find({'members':{$in:phone}});
+        console.log(room);
+        if (room) {
+          io.sockets.emit("user " + phone, room);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    });
   },
 };
+

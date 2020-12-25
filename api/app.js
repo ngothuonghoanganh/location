@@ -46,8 +46,9 @@ app.use(function (req, res, next) {
 const server = http.createServer(app)
 
 // This creates our socket using the instance of the server
-const io = socketIO(server)
-
+const io = socketIO.listen(server)
+io.set('match origin protocol', true);
+io.set('origins', '*:*');
 mongoose.connect(dbUrl, (err) => {
   console.log("mongodb connected", err);
 })
