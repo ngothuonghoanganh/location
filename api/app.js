@@ -47,10 +47,14 @@ const server = http.createServer(app)
 
 
 // This creates our socket using the instance of the server
-const io = socketIO.listen(server,{})
+const io = socketIO.listen(server,{
+  pingInterval: 10000,
+  pingTimeout: 5000,
+  cookie: false
+})
 // io.set('match origin protocol', true);
 // io.set('origins', '*:*');
-// console.log(io)
+console.log(io)
 mongoose.connect(dbUrl, (err) => {
   console.log("mongodb connected", err);
 })
