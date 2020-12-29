@@ -47,11 +47,13 @@ const server = http.createServer(app)
 
 
 // This creates our socket using the instance of the server
-const io = socketIO.listen(server,{
-  pingInterval: 10000,
-  pingTimeout: 5000,
-  cookie: false
-})
+// const io = socketIO.listen(server,{
+//   pingInterval: 10000,
+//   pingTimeout: 5000,
+//   cookie: false
+// })
+
+const io = require('socket.io')(server);
 // io.set('match origin protocol', true);
 // io.set('origins', '*:*');
 console.log(io)
