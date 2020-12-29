@@ -45,10 +45,12 @@ app.use(function (req, res, next) {
 // our server instance
 const server = http.createServer(app)
 
+
 // This creates our socket using the instance of the server
-const io = socketIO.listen(server)
-io.set('match origin protocol', true);
-io.set('origins', '*:*');
+const io = socketIO.listen(server,{})
+// io.set('match origin protocol', true);
+// io.set('origins', '*:*');
+// console.log(io)
 mongoose.connect(dbUrl, (err) => {
   console.log("mongodb connected", err);
 })
