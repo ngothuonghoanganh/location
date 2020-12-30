@@ -53,7 +53,11 @@ const server = http.createServer(app)
 //   cookie: false
 // })
 
-const io = require('socket.io')(server);
+const io = require('socket.io')(server,{
+  pingInterval: 10000,
+  pingTimeout: 10000,
+  origins: '*:*'
+});
 // io.set('match origin protocol', true);
 // io.set('origins', '*:*');
 console.log(io)
