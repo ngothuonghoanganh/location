@@ -55,7 +55,7 @@ const server = http.createServer(app)
 
 const io = require('socket.io')(server,{
   pingInterval: 10000,
-  pingTimeout: 10000,
+  pingTimeout: 12000,
   origins: '*:*',
   transports: ['websocket', 'flashsocket', 'htmlfile','xhr-polling','json-polling']
 });
