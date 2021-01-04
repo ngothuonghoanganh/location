@@ -33,8 +33,8 @@ let userStatusDetails = new mongoose.Schema({
     type: Date,
   },
   status: { type: String },
-  locations: [{ type: String }],
-  lastLocation: { type: String },
+  locations: [{ type: Object }],
+  lastLocation: { type: Object },
 });
 
 let roomSchema = new mongoose.Schema({
