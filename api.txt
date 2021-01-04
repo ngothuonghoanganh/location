@@ -55,7 +55,7 @@
          * roomPIN: String,
          * userId: String,
          * lastTimeOnl: date,
-         * location,
+         * location: object,
          * status: onl/off
          * }
          **/
